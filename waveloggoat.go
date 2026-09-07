@@ -62,7 +62,7 @@ type RigData struct {
 // WavelogJSONRequest matches the required JSON payload for the Wavelog API update.
 type WavelogJSONRequest struct {
 	Radio       string   `json:"radio"`
-	Power       *float64 `json:"power,omitempty"`
+	Power       *int     `json:"power,omitempty"`
 	Frequency   int      `json:"frequency"`
 	Mode        string   `json:"mode"`
 	FrequencyRX int      `json:"frequency_rx,omitempty"`
@@ -540,7 +540,7 @@ func postToWavelog(config ProfileConfig, data RigData) error {
 		Mode:      data.Mode,
 	}
 	if data.PowerValid {
-		p := data.Power
+		p := int(data.Power)
 		payload.Power = &p
 	}
 	if data.Split != 0 {
